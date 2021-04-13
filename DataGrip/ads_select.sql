@@ -1,7 +1,7 @@
 use gmall;
 
 -- ************************************************************
--- 商品统计的维度表
+-- 商品统计
 
 
 -- zs
@@ -70,8 +70,8 @@ select "2020-06-14" dt,
        tm_id,
        tm_name,
        sum(order_user_count),
-       sum(`if`(order_user_count >= 2, 1, 0)),
-       sum(`if`(order_user_count >= 1, 1, 0)),
+--        sum(`if`(order_user_count >= 2, 1, 0)),
+--        sum(`if`(order_user_count >= 1, 1, 0)),
        cast(sum(if(order_user_count >= 2, 1, 0)) / sum(if(order_user_count >= 1, 1, 0)) as decimal(16, 2))
 from (
          select recent_days,
@@ -103,7 +103,12 @@ group by recent_days, "2020-06-14", tm_id, tm_name
 
 -- ************************************************************
 -- 订单统计
+
+-- 我写的
 -- TODO  : 可以反驳一波
+-- 效率低，这样查会查很多分区。where >=。
+-- 文档的方法where = 效率高
+-- 能在dwt查出来的数据就不在dwd查。
 select "2020-06-14",
        recent_deys,
        count(id)               order_count,
@@ -113,6 +118,7 @@ from dwd_order_info lateral view explode(array(1, 7, 30)) tmp as recent_deys
 where dt >= date_add("2020-06-14", -recent_deys + 1)
 group by recent_deys
 ;
+
 
 -- 文档的答案，和我做的一样。
 select '2020-06-14',
@@ -317,14 +323,15 @@ from (
          where dt = "2020-06-14"
          group by activity_id
      ) t1
-         left join (
+         join (
     select activity_id,
            activity_name,
            start_time
     from dim_activity_rule_info
     where dt = "2020-06-14"
+    group by activity_id, activity_name, start_time
 ) t2
-                   on t1.activity_id = t2.activity_id
+              on t1.activity_id = t2.activity_id
 ;
 
 

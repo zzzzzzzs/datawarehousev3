@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding/ads_select.sql=UTF-8
+encoding/console.sql=UTF-8
+encoding/dws_create_tables.sql=UTF-8

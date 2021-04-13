@@ -1,0 +1,31 @@
+{
+	"folders": {},
+	"connections": {
+		"apache_hive2-178b6cf0bfe-d1cbbdfa4fe61b8": {
+			"provider": "hive",
+			"driver": "apache_hive2",
+			"name": "8.130.166.168",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "8.130.166.168",
+				"port": "10000",
+				"url": "jdbc:hive2://8.130.166.168:10000",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

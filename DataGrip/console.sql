@@ -53,36 +53,103 @@ SHOW FUNCTIONS;
 
 from dwt_user_topic
 select user_id,
-       count(*) over()
+       count(*) over ()
 ;
 
 
 from dwt_user_topic
 select user_id,
        login_date_1d_count,
-       count(*) over(partition by login_date_1d_count)
+       count(*) over (partition by login_date_1d_count)
 ;
 
 
 from dwt_user_topic
 select user_id,
        login_date_1d_count,
-       count(*) over(order by login_date_1d_count)
+       count(*) over (order by login_date_1d_count)
 ;
 
 from dwt_user_topic
 select user_id,
        login_date_1d_count,
-       count(*) over(order by login_date_1d_count)
+       count(*) over (order by login_date_1d_count)
 ;
 
 from dwt_user_topic
 select user_id,
        login_date_1d_count,
-       count(*) over(partition by login_last_1d_day_count order by login_date_1d_count)
+       count(*) over (partition by login_last_1d_day_count order by login_date_1d_count)
 ;
 
 desc function extended explode;
 desc function extended split;
 
-SELECT   explode(array(10, 20));
+SELECT explode(array(10, 20));
+
+
+use gmall;
+
+select start_date,
+       activity_id
+from ads_activity_stats
+limit 10
+;
+
+
+--拉链维度表视图
+create view dim_user_info_view
+    as
+select *
+from dim_user_info
+where dt = '9999-99-99';
+
+
+create view dim_sku_info_view
+as
+select id,
+       price,
+       sku_name,
+       sku_desc,
+       weight,
+       is_sale,
+       spu_id,
+       spu_name,
+       category3_id,
+       category3_name,
+       category2_id,
+       category2_name,
+       category1_id,
+       category1_name,
+       tm_id,
+       tm_name,
+       create_time
+from dim_sku_info
+where dt = '2020-06-14';
+
+
+use default;
+
+alter table student rename to student_m2;
+
+
+create table if not exists student_m(
+id int comment "student's id ",
+name string  comment "student's name"
+)
+comment "this is student table "
+row format delimited fields terminated by '\t'
+lines terminated by '\n'
+stored as textfile
+location '/user/hive/warehouse/student_m'
+tblproperties('aa'='bb');
+
+alter table student_m rename to student_m3;
+
+create EXTERNAL table if not exists  student_e
+(id int ,
+name string
+)
+row format delimited fields terminated by '\t' ;
+
+alter table student_e rename to student_e1;
