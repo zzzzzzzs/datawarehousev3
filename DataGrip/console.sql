@@ -156,3 +156,12 @@ alter table student_e rename to student_e1;
 
 create table ip (time string,interface string,ip string)
 row format delimited fields terminated by '\t';
+
+
+create database gmall;
+
+use gmall;
+
+drop database gmall;
+
+insert overwrite table dim_date_info select * from tmp_dim_date_info;
