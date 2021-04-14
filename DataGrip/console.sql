@@ -153,3 +153,6 @@ name string
 row format delimited fields terminated by '\t' ;
 
 alter table student_e rename to student_e1;
+
+create table ip (time string,interface string,ip string)
+row format delimited fields terminated by '\t';
