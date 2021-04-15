@@ -1,5 +1,7 @@
 use gmall;
 
+
+
 -- 4.2.1 活动信息表
 DROP TABLE IF EXISTS ods_activity_info;
 CREATE EXTERNAL TABLE ods_activity_info(

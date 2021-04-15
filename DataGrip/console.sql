@@ -163,5 +163,3 @@ create database gmall;
 use gmall;
 
 drop database gmall;
-
-insert overwrite table dim_date_info select * from tmp_dim_date_info;
