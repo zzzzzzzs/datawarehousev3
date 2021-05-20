@@ -12,20 +12,6 @@
 				"port": "10000",
 				"url": "jdbc:hive2://8.130.166.168:10000",
 				"type": "dev",
-				"auth-model": "native"
-			}
-		},
-		"yandex_clickhouse-179839b6de9-33edb7124f0360be": {
-			"provider": "clickhouse",
-			"driver": "yandex_clickhouse",
-			"name": "aliyun102",
-			"save-password": true,
-			"read-only": false,
-			"configuration": {
-				"host": "aliyun102",
-				"port": "8123",
-				"url": "jdbc:clickhouse://aliyun102:8123",
-				"type": "dev",
 				"auth-model": "native",
 				"handlers": {}
 			}

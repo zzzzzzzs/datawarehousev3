@@ -1,5 +1,6 @@
 use gmall;
 
+show databases;
 
 select brand,
        count(*) over ()
