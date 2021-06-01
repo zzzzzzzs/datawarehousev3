@@ -65,7 +65,7 @@ with tmp_login as (
          group by user_id
      ),
      tmp_order_detail as (
-         select user_id,
+         select user_id
      )
 
 select *
